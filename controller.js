@@ -2,11 +2,11 @@ var countryApp = angular.module('countryApp',['ngRoute']);
 
 countryApp.config(function($routeProvider){
 	$routeProvider.when('/',{
-		template: '<ul><li ng-repeat="country in countries">{{country.name}}</li></ul>',
+		templateUrl: 'country-list.html',
 		controller: 'countryCntrl'		
 	}).
 	when('/:countryName',{
-		template: '<h1>Country detail will go here.</h1>',
+		templateUrl: 'country-detail.html',
 		controller: 'countryDetailCntrl'
 	}).
 	otherwise({
@@ -15,11 +15,9 @@ countryApp.config(function($routeProvider){
 });
 
 countryApp.controller('countryCntrl', function($scope, $http){
-
 	$http.get('countries.json').success(function(countryData){
 		$scope.countries = countryData;
 	});
-
 });
 
 countryApp.controller('countryDetailCntrl', function($scope, $routeParams){
